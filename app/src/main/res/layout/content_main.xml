@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="rezaei.mohammad.ecoa.ui.MainActivity"
+    tools:showIn="@layout/activity_main">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:background="@color/colorPrimaryDark"
+            android:textSize="18dp"
+            android:textColor="?android:textColorPrimary"
+            android:text="سطح شما" />
+
+        <RadioGroup
+            android:id="@+id/groupProgrammerLevel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:checkedButton="@id/levelBeginner"
+            android:gravity="right"
+            android:layoutDirection="rtl">
+
+            <RadioButton
+                android:id="@+id/levelBeginner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="مبتدی" />
+
+            <RadioButton
+                android:id="@+id/levelSemiProfessional"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="نیمه حرفه ای" />
+
+            <RadioButton
+                android:id="@+id/levelProfessional"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="حرفه ای" />
+        </RadioGroup>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:background="@color/colorPrimaryDark"
+            android:textSize="18dp"
+            android:textColor="?android:textColorPrimary"
+            android:text="سختی برنامه" />
+
+        <RadioGroup
+            android:id="@+id/groupAppHardness"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checkedButton="@id/haVerySimple"
+            android:padding="8dp"
+            android:gravity="right"
+            android:layoutDirection="rtl">
+
+            <RadioButton
+                android:id="@+id/haVerySimple"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="خیلی ساده" />
+
+            <RadioButton
+                android:id="@+id/haSimple"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="ساده" />
+
+            <RadioButton
+                android:id="@+id/haMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="متوسط" />
+
+            <RadioButton
+                android:id="@+id/haSemiHard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="حدودا سخت" />
+
+            <RadioButton
+                android:id="@+id/haHard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="سخت" />
+
+            <RadioButton
+                android:id="@+id/haVeryHard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="خیلی سخت" />
+        </RadioGroup>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:background="@color/colorPrimaryDark"
+            android:textSize="18dp"
+            android:textColor="?android:textColorPrimary"
+            android:text="تعداد اکتیویتی، فرگمنت، سرویس ها" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/inputServices"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="18dp"
+                android:text="1"
+                android:inputType="number"
+                android:gravity="center"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:textSize="14dp"
+                android:textColor="?android:textColorSecondary"
+                android:text="تعداد سرویس:" />
+
+            <EditText
+                android:id="@+id/inputActivities"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="18dp"
+                android:text="1"
+                android:inputType="number"
+                android:gravity="center"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:textSize="14dp"
+                android:textColor="?android:textColorSecondary"
+                android:text="تعداد اکتیویتی، فرگمنت:" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:background="@color/colorPrimaryDark"
+            android:textSize="18dp"
+            android:textColor="?android:textColorPrimary"
+            android:text="گرافیک" />
+
+        <RadioGroup
+            android:id="@+id/groupGraphic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checkedButton="@id/graphicSimple"
+            android:padding="8dp"
+            android:gravity="right"
+            android:layoutDirection="rtl">
+
+            <RadioButton
+                android:id="@+id/graphicSimple"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="ساده" />
+
+            <RadioButton
+                android:id="@+id/graphicNormal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="معمولی" />
+
+            <RadioButton
+                android:id="@+id/graphicGood"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="خوب" />
+
+            <RadioButton
+                android:id="@+id/graphicBest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="عالی" />
+        </RadioGroup>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:background="@color/colorPrimaryDark"
+            android:textSize="18dp"
+            android:textColor="?android:textColorPrimary"
+            android:text="سایر" />
+
+        <CheckBox
+            android:id="@+id/checkboxSource"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:layoutDirection="rtl"
+            android:text="تحویل سورس" />
+
+        <CheckBox
+            android:id="@+id/checkboxSupport"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:layoutDirection="rtl"
+            android:text="پشتیبانی یکساله" />
+
+        <Button
+            android:id="@+id/btnSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            style="@style/Base.Widget.AppCompat.Button.Colored"
+            android:text="تخمین هزینه و زمان"
+            android:layout_marginTop="8dp"/>
+
+    </LinearLayout>
+
+
+</android.support.v4.widget.NestedScrollView>
