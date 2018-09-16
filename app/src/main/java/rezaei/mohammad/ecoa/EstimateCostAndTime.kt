@@ -11,10 +11,9 @@ class EstimateCostAndTime(private val programmerLevel: Settings.ProgrammerLevel
                           ,private val activity: Int,private val service: Int
                           ,private val sourceCode: Boolean, val support: Boolean) {
 
-    fun getCostAndTime():Pair<Float,Int>{
+    fun getCostAndTime():Pair<Long,Int>{
 
-        var totalPrice: Float = programmerLevel.getBasePrice() + estimateActivitiesCost()
-        + estimateServicesCost()
+        var totalPrice: Float = programmerLevel.getBasePrice() + estimateActivitiesCost() + estimateServicesCost()
 
         if(sourceCode){
             totalPrice += estimateSourceCost(totalPrice)
@@ -22,7 +21,7 @@ class EstimateCostAndTime(private val programmerLevel: Settings.ProgrammerLevel
         if(support){
             totalPrice += estimateSupportCost(totalPrice)
         }
-        return Pair(totalPrice,estimateTime())
+        return Pair(totalPrice.toLong(),estimateTime())
     }
 
     private fun estimateActivitiesCost(): Float {
@@ -42,6 +41,7 @@ class EstimateCostAndTime(private val programmerLevel: Settings.ProgrammerLevel
     }
 
     private fun estimateTime():Int{
-        return (activity + service) * appHardness.getTimeRate()
+        return ((activity * graphic.getTimeRate()) + (activity + service) * appHardness.getTimeRate())
+                .times(programmerLevel.getTimeRate())
     }
 }

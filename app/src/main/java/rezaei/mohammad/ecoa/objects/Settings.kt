@@ -5,15 +5,29 @@ package rezaei.mohammad.ecoa.objects
  */
 object Settings {
     enum class ProgrammerLevel{
+        Intern,
         Beginner,
         SemiProfessional,
-        Professional;
+        Professional,
+        FullStack;
 
         fun getBasePrice():Long{
             return when(this){
-                Beginner -> 100000
-                SemiProfessional -> 300000
-                Professional -> 500000
+                Intern -> 100000
+                Beginner -> 300000
+                SemiProfessional -> 500000
+                Professional -> 800000
+                FullStack -> 1000000
+            }
+        }
+
+        fun getTimeRate():Int{
+            return when(this){
+                Intern -> 5
+                Beginner -> 4
+                SemiProfessional -> 3
+                Professional -> 2
+                FullStack -> 1
             }
         }
     }
@@ -23,17 +37,15 @@ object Settings {
         Simple,
         Medium,
         SemiHard,
-        Hard,
-        VeryHard;
+        Hard;
 
         fun getHardnessRate():Float{
             return when(this){
                 VerySimple -> 1f
-                Simple -> 1.2f
-                Medium -> 1.5f
-                SemiHard -> 2f
-                Hard -> 2.5f
-                VeryHard -> 3f
+                Simple -> 1.5f
+                Medium -> 2.5f
+                SemiHard -> 3.5f
+                Hard -> 4f
             }
         }
 
@@ -44,7 +56,6 @@ object Settings {
                 Medium -> 25
                 SemiHard -> 30
                 Hard -> 40
-                VeryHard -> 50
             }
         }
 
@@ -55,29 +66,40 @@ object Settings {
                 Medium -> 15
                 SemiHard -> 20
                 Hard -> 35
-                VeryHard -> 40
             }
         }
 
     }
 
     enum class Graphic{
-        Simple,
-        Normal,
+        None,
+        Beginner,
+        Acceptable,
         Good,
         Best;
 
         fun getGraphicRate():Float{
             return when(this){
-                Simple -> 1f
-                Normal -> 1.2f
-                Good -> 1.5f
-                Best -> 2f
+                None -> 1f
+                Beginner -> 1.5f
+                Acceptable -> 2.5f
+                Good -> 3.5f
+                Best -> 4f
+            }
+        }
+
+        fun getTimeRate():Int{
+            return when(this){
+                None -> 2
+                Beginner -> 5
+                Acceptable -> 8
+                Good -> 10
+                Best -> 15
             }
         }
     }
 
-    const val activityBasePrice = 50000
-    const val serviceBasePrice = 30000
+    const val activityBasePrice = 70000
+    const val serviceBasePrice = 50000
     const val supportRate = 25
 }
