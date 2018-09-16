@@ -1,31 +1,17 @@
 package rezaei.mohammad.ecoa.ui
-
 import android.content.Intent
 import android.os.Bundle
-import android.support.transition.TransitionManager
 import android.support.v4.content.res.ResourcesCompat
-import android.support.v4.widget.NestedScrollView
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.RecyclerView
-import android.text.Editable
-import android.text.TextWatcher
-import android.view.MotionEvent
-import android.view.View
-import android.widget.ScrollView
-import android.widget.TextView
-import android.widget.Toast
+import android.view.Menu
+import android.view.MenuItem
 import com.hsalf.smilerating.BaseRating
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
-import kotlinx.android.synthetic.main.content_main.view.*
 import rezaei.mohammad.ecoa.EstimateCostAndTime
 import rezaei.mohammad.ecoa.R
-import rezaei.mohammad.ecoa.R.id.*
-import rezaei.mohammad.ecoa.objects.Cons
 import rezaei.mohammad.ecoa.objects.Settings
 import java.text.DecimalFormat
-import java.text.NumberFormat
-import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -34,8 +20,8 @@ class MainActivity : AppCompatActivity() {
     }
     private var programmerLevel: Settings.ProgrammerLevel = Settings.ProgrammerLevel.Intern
     private var appHardness: Settings.AppHardness = Settings.AppHardness.VerySimple
-    var activities = 0
-    var services = 0
+    private var activities = 0
+    private var services = 0
     private var graphic: Settings.Graphic = Settings.Graphic.None
     private var needSource: Boolean = false
     private var needSupport: Boolean = false
@@ -43,7 +29,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        //setSupportActionBar(toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar?.title = ""
 
         initAppbar()
         initViews()
@@ -157,5 +144,20 @@ class MainActivity : AppCompatActivity() {
 
         txtPrice.countAnimation(txtPrice.text.toString().replace(",","").toInt(),costAndTime.first.toInt())
         txtTime.countAnimation(txtTime.text.toString().toInt(),costAndTime.second)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main,menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item?.itemId){
+            R.id.action_info -> {
+                val intent = Intent(this@MainActivity,AboutActivity::class.java)
+                startActivity(intent)
+            }
+        }
+        return true
     }
 }

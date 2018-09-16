@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.ResultActivity"
+            android:name=".ui.AboutActivity"
             android:label="@string/title_activity_result"
             android:theme="@style/AppTheme.NoActionBar"/>
     </application>
