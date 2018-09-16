@@ -2,6 +2,8 @@ package rezaei.mohammad.ecoa.ui
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.content.res.ResourcesCompat
+import android.support.v4.view.ViewCompat
+import android.support.v4.widget.NestedScrollView
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
@@ -42,6 +44,14 @@ class MainActivity : AppCompatActivity() {
         val height = screenX.div(1.8f)
         param.height = height.toInt()
         appBar.layoutParams = param
+
+        scrollView.setOnScrollChangeListener { v: NestedScrollView?, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int ->
+            if(scrollView.canScrollVertically(-1)){
+                ViewCompat.setElevation(appBar,8f)
+            } else {
+                ViewCompat.setElevation(appBar,0f)
+            }
+        }
     }
 
     private fun initViews(){
@@ -142,7 +152,7 @@ class MainActivity : AppCompatActivity() {
                 , needSource
                 , needSupport).getCostAndTime()
 
-        txtPrice.countAnimation(txtPrice.text.toString().replace(",","").toInt(),costAndTime.first.toInt())
+        txtPrice.countAnimation(txtPrice.text.toString().filter { it.isDigit() }.toInt(),costAndTime.first.toInt())
         txtTime.countAnimation(txtTime.text.toString().toInt(),costAndTime.second)
     }
 
