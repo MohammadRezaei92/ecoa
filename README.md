@@ -1,5 +1,5 @@
 # ecoa (estimate cost of an android app)
-
+<img src="https://github.com/MohammadRezaei92/ecoa/blob/master/app/src/main/ic_launcher-web.png" width="100" height="100" />
 این برنامه برحسب چندین پارامتر مختلف مبلغ و زمان مورد نیاز برای انجام یک پروژه اندرویدی را به صورت تقریبی محاسبه میکند
 
 ![screenshot](https://github.com/MohammadRezaei92/ecoa/blob/master/photo5834570212870041242.jpg)
