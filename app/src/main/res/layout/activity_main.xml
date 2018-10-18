@@ -52,6 +52,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+                    android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginBottom="8dp"
                     android:gravity="center"
@@ -88,13 +89,24 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/layTime"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+                    android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginBottom="8dp"
+                    android:background="?selectableItemBackground"
                     android:gravity="center"
                     android:layoutDirection="ltr">
+
+                    <ImageView
+                        android:id="@+id/imgCollapse"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:scaleType="center"
+                        android:tint="@color/white_100"
+                        app:srcCompat="@drawable/arrow_down"/>
 
                     <TextView
                         android:layout_width="match_parent"
@@ -125,6 +137,41 @@
                         app:srcCompat="@drawable/ic_access_time"/>
 
                 </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layTimeDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="8dp"
+                android:visibility="gone"
+                android:background="?selectableItemBackground"
+                android:gravity="top"
+                android:layoutDirection="ltr">
+
+                <ImageButton
+                    android:id="@+id/help"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:scaleType="center"
+                    style="@style/Base.Widget.AppCompat.Button.Borderless"
+                    android:padding="0dp"
+                    android:tint="@color/white_100"
+                    app:srcCompat="@drawable/ic_help"/>
+
+                <TextView
+                    android:id="@+id/txtTimeDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16dp"
+                    android:textColor="@color/white"
+                    android:gravity="right"
+                    android:layout_marginRight="24dp"
+                    android:text="ساعت" />
+
+            </LinearLayout>
 
             </LinearLayout>
 

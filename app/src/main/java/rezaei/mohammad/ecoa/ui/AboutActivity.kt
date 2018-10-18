@@ -2,7 +2,7 @@ package rezaei.mohammad.ecoa.ui
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import kotlinx.android.synthetic.main.content_result.*
+import kotlinx.android.synthetic.main.content_about.*
 import rezaei.mohammad.ecoa.BuildConfig
 import rezaei.mohammad.ecoa.R
 import android.content.Intent
@@ -13,7 +13,7 @@ class AboutActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_result)
+        setContentView(R.layout.activity_about)
 
         app_version.text = BuildConfig.VERSION_NAME
 
