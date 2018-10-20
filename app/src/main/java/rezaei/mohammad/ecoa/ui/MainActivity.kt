@@ -1,9 +1,13 @@
 package rezaei.mohammad.ecoa.ui
+import android.Manifest
 import android.annotation.SuppressLint
-import android.content.DialogInterface
 import android.content.Intent
-import android.graphics.Typeface
+import android.content.pm.PackageManager
+import android.graphics.*
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.support.transition.TransitionManager
 import android.support.v4.content.res.ResourcesCompat
 import android.support.v4.view.ViewCompat
@@ -22,8 +26,10 @@ import kotlinx.android.synthetic.main.content_main.*
 import rezaei.mohammad.ecoa.EstimateCostAndTime
 import rezaei.mohammad.ecoa.R
 import rezaei.mohammad.ecoa.objects.Settings
+import java.lang.StringBuilder
 import java.text.DecimalFormat
-import kotlin.text.Typography.times
+import java.text.NumberFormat
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -40,6 +46,7 @@ class MainActivity : AppCompatActivity() {
     private val HoursOfDay = 8.0
     private val DaysOfWeek = 5.0
     private val WeeksOfMonth = 4.0
+    private lateinit var costAndTime: Pair<Long,Int>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -180,7 +187,7 @@ class MainActivity : AppCompatActivity() {
         activities = pickerActivites.value
         services = pickerServices.value
 
-        val costAndTime = EstimateCostAndTime(programmerLevel
+        costAndTime = EstimateCostAndTime(programmerLevel
                 , appHardness
                 , graphic
                 , activities
@@ -207,6 +214,72 @@ class MainActivity : AppCompatActivity() {
         return result
     }
 
+    private fun shareText(){
+        val result = StringBuilder()
+        result.appendln("نتیجه تخمین هزینه برای اپلیکیشن اندرویدی شما به شرح زیر است")
+        result.appendln("قیمت تقریبی: ${NumberFormat.getNumberInstance(Locale.US).format(costAndTime.first)} تومان")
+        result.appendln("زمان تقریبی: ${costAndTime.second} ساعت")
+        result.appendln("محاسبه بالا توسط فاکتورهای زیر انجام گرفته است")
+        result.appendln("سطح برنامه نویس: ${programmerLevel.getName()}")
+        result.appendln("سختی برنامه: ${appHardness.getName()}")
+        result.appendln("تعداد اکتیویتی، فرگمنت: $activities")
+        result.appendln("تعداد سرویس: $services")
+        result.appendln("سطح گرافیک برنامه: ${graphic.getName()}")
+        result.appendln("تحویل سورس: ${if(needSource) "بله" else "خیر"}")
+        result.appendln("پشتیبانی یکساله: ${if(needSupport) "بله" else "خیر"}")
+        result.appendln("*تخمین هزینه و زمان توسط اپلیکیشن ecoa*")
+        result.appendln("دریافت اپلیکیشن ecoa")
+        result.appendln("market://details?id=$packageName")
+
+        val intent = Intent(Intent.ACTION_SEND)
+        intent.type = "text/html"
+        intent.putExtra(Intent.EXTRA_TEXT,result.toString())
+        startActivity(Intent.createChooser(intent,"Share as..."))
+    }
+
+    private fun shareImage(){
+        val header = getBitmapFromView(appBar)
+        val body = getBitmapFromScrollView(scrollView,scrollView.getChildAt(0).height,scrollView.width)
+        val result = mergeBitmaps(header,body)
+        val bitmapPath = MediaStore.Images.Media.insertImage(contentResolver,result,"title",null)
+        val intent = Intent(Intent.ACTION_SEND)
+        intent.type = "image/*"
+        intent.putExtra(Intent.EXTRA_STREAM,Uri.parse(bitmapPath))
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        intent.putExtra(Intent.EXTRA_TEXT,"تخمین هزینه و زمان توسط اپلیکیشن ecoa")
+        startActivity(Intent.createChooser(intent,"Share as..."))
+    }
+
+    private fun getBitmapFromView(view: View): Bitmap {
+        view.isDrawingCacheEnabled = true
+        view.buildDrawingCache(true)
+        val bitmap = Bitmap.createBitmap(view.drawingCache)
+        view.isDrawingCacheEnabled = false
+       return bitmap
+    }
+
+    private fun getBitmapFromScrollView(view: View,height: Int,width: Int): Bitmap {
+        val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        val bgDrawable = view.background
+        if (bgDrawable != null)
+            bgDrawable.draw(canvas)
+        else
+            canvas.drawColor(Color.WHITE)
+        view.draw(canvas)
+        return bitmap
+    }
+
+    private fun mergeBitmaps(bitmap1: Bitmap, bitmap2: Bitmap): Bitmap{
+        val width = bitmap1.width
+        val height = bitmap1.height + bitmap2.height
+        val result = Bitmap.createBitmap(width,height,Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(result)
+        canvas.drawBitmap(bitmap1,0f,0f,null)
+        canvas.drawBitmap(bitmap2,0f,bitmap1.height.toFloat(),null)
+        return result
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main,menu)
         return true
@@ -218,7 +291,26 @@ class MainActivity : AppCompatActivity() {
                 val intent = Intent(this@MainActivity,AboutActivity::class.java)
                 startActivity(intent)
             }
+            R.id.action_share_text -> shareText()
+            R.id.action_share_image -> {
+                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1 &&
+                        checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+                    checkPermission()
+                else
+                    shareImage()
+            }
         }
         return true
+    }
+
+    private fun checkPermission(){
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1)
+            requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),1)
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if(requestCode == 1 && grantResults.isNotEmpty())
+            shareImage()
     }
 }

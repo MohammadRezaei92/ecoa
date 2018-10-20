@@ -7,4 +7,23 @@
         android:orderInCategory="100"
         android:title="درباره"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_share"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_share"
+        android:title="اشتراک گذاری"
+        app:showAsAction="always" >
+        <menu>
+            <item
+                android:id="@+id/action_share_text"
+                android:orderInCategory="100"
+                android:title="اشتراک گذاری متنی"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/action_share_image"
+                android:orderInCategory="100"
+                android:title="اشتراک گذاری تصویری"
+                app:showAsAction="never" />
+        </menu>
+    </item>
 </menu>

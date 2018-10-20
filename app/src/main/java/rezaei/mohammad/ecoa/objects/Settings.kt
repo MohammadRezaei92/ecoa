@@ -30,6 +30,16 @@ object Settings {
                 FullStack -> 1
             }
         }
+
+        fun getName():String{
+            return when(this){
+                Intern -> "کارآموز"
+                Beginner -> "مبتدی"
+                SemiProfessional -> "نیمه حرفه ای"
+                Professional -> "حرفه ای"
+                FullStack -> "فول استک"
+            }
+        }
     }
 
     enum class AppHardness{
@@ -69,6 +79,16 @@ object Settings {
             }
         }
 
+        fun getName():String{
+            return when(this){
+                VerySimple -> "خیلی ساده"
+                Simple -> "ساده"
+                Medium -> "متوسط"
+                SemiHard -> "حدودا سخت"
+                Hard -> "سخت"
+            }
+        }
+
     }
 
     enum class Graphic{
@@ -95,6 +115,16 @@ object Settings {
                 Acceptable -> 8
                 Good -> 10
                 Best -> 15
+            }
+        }
+
+        fun getName():String{
+            return when(this){
+                None -> "بدون گرافیک"
+                Beginner -> "مبتدی"
+                Acceptable -> "قابل قبول"
+                Good -> "خوب"
+                Best -> "عالی"
             }
         }
     }
